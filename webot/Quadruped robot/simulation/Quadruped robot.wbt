@@ -1,0 +1,948 @@
+#VRML_SIM R2021b utf8
+WorldInfo {
+  basicTimeStep 10
+  inkEvaporation 4
+  coordinateSystem "NUE"
+  contactProperties [
+    ContactProperties {
+      coulombFriction [
+        1.5
+      ]
+      bounce 0
+    }
+    ContactProperties {
+      material1 "wall"
+      coulombFriction [
+        1.5
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.0033995822403288735 -0.9607679071055918 -0.27733278117909577 3.0965884224099782
+  position 4.699771775975204 3.2521538987479444 -13.741690981665377
+  follow "robot"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 21 30
+  wallHeight 0.2
+}
+WoodenPallet {
+  translation 0.389824 1.77636e-15 1.84052
+  rotation 0 1 0 2.04989
+  size 0.8 0.1 1.2
+}
+WoodenPallet {
+  translation -0.88886 0 1.77535
+  rotation 0 -1 0 0.541925
+  name "wooden pallet(1)"
+  size 0.8 0.1 1.2
+}
+WoodenPallet {
+  translation -1.62495 -4.00791e-14 -3.92604
+  rotation 0 1 0 1.13882
+  name "wooden pallet(2)"
+  size 0.8 0.1 1.2
+}
+WoodenPallet {
+  translation -1.08718 0 3.61611
+  name "wooden pallet(3)"
+  size 0.8 0.1 1.2
+}
+WoodenBox {
+  translation 0.0992687 0.25 -1.74271
+  size 3 0.1 0.6
+}
+WoodenBox {
+  translation 0.100739 0.15 -1.2509
+  name "wooden box(4)"
+  size 3 0.1 0.6
+}
+WoodenBox {
+  translation 0.100739 0.15 -2.2309
+  name "wooden box(3)"
+  size 3 0.1 0.6
+}
+WoodenBox {
+  translation 0.0357807 0.05 -2.71663
+  name "wooden box(1)"
+  size 3 0.1 0.6
+}
+WoodenBox {
+  translation 0.0357807 0.05 -0.81663
+  name "wooden box(5)"
+  size 3 0.1 0.6
+}
+WoodenBox {
+  translation 0 0 0
+  name "wooden box(2)"
+  size 3 0.1 0.6
+}
+Robot {
+  translation 4.06677 0.73997 -8.8503
+  rotation -0.564266168453227 0.7010808965241739 -0.43599227936739315 8.618183308802926e-18
+  children [
+    GPS {
+      children [
+        Solid {
+          translation 0 0.25 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+              }
+              geometry Cone {
+                bottomRadius 0.05
+                height 0.1
+              }
+            }
+          ]
+        }
+      ]
+      name "global_gps"
+    }
+    DistanceSensor {
+      translation 0.2 0 0
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Cylinder {
+            height 0.1
+            radius 0.05
+          }
+        }
+      ]
+      name "distance sensor y"
+      lookupTable [
+        0 0 0
+        100 100 0
+      ]
+    }
+    DistanceSensor {
+      translation 0 0 -0.4
+      rotation 0 1 0 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Cylinder {
+            height 0.1
+            radius 0.05
+          }
+        }
+      ]
+      name "distance sensor x"
+      lookupTable [
+        0 0 0
+        100 100 0
+      ]
+    }
+    Camera {
+      translation 0 0.1 0.4
+      rotation 0 -1 0 3.14
+      children [
+        Transform {
+          children [
+            Shape {
+              appearance PBRAppearance {
+              }
+              geometry Cylinder {
+                height 0.1
+                radius 0.05
+              }
+            }
+          ]
+        }
+      ]
+    }
+    Accelerometer {
+      translation 0 0.16 0
+      children [
+        DEF ACC Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.1 0.1 0.1
+          }
+        }
+      ]
+      boundingObject USE ACC
+      physics Physics {
+        density -1
+        mass 0.2
+      }
+    }
+    InertialUnit {
+      translation 0 0.003 -0.045
+      children [
+        DEF IMU_SHAPE Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+    }
+    DEF BODY_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 0.333333 1 1
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.4 0.2 0.8
+      }
+    }
+    DEF LB_LEG_POS Transform {
+      translation 0.24 0 -0.3
+      children [
+        DEF LB_LEG_L0 HingeJoint {
+          jointParameters HingeJointParameters {
+            position 1.1308973183689637e-19
+            axis 0 0 1
+            minStop -0.8
+            maxStop 0.8
+          }
+          device [
+            PositionSensor {
+              name "LBL0_position sensor"
+            }
+            RotationalMotor {
+              name "LBL0_rotational motor"
+              maxTorque 2000
+            }
+          ]
+          endPoint Solid {
+            translation -2.928176983663648e-07 0.0003215887949651337 -7.533677867765906e-06
+            rotation -0.9999999999999267 -2.602580858338959e-07 2.8077944583049024e-07 1.570838015548684
+            children [
+              DEF L0_SHAPE Shape {
+                appearance PBRAppearance {
+                }
+                geometry Cylinder {
+                  height 0.05
+                  radius 0.02
+                }
+              }
+              Transform {
+                rotation 1 0 0 1.5707996938995747
+                children [
+                  DEF LB_LEG_L1 HingeJoint {
+                    jointParameters HingeJointParameters {
+                      position 0.6
+                      minStop 0.2
+                      maxStop 1.5
+                    }
+                    device [
+                      PositionSensor {
+                        name "LBL1_position sensor"
+                      }
+                      RotationalMotor {
+                        name "LBL1_rotational motor"
+                        maxTorque 2000
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 2.3753306011006327e-05 -0.16523930929930886 -0.11309594707172432
+                      rotation 0.9999999900261576 -0.00011208267892695329 8.59369418670984e-05 0.6000002479771475
+                      children [
+                        DEF LEG_0_SHAPE Shape {
+                          appearance PBRAppearance {
+                            baseColor 1 1 0
+                            roughness 1
+                            metalness 0
+                          }
+                          geometry Capsule {
+                            height 0.4
+                            radius 0.02
+                          }
+                        }
+                        Transform {
+                          translation 0 -0.2 0
+                          children [
+                            DEF LB_LEG_L2 HingeJoint {
+                              jointParameters HingeJointParameters {
+                                position -1.28
+                                minStop -2.2
+                                maxStop -0.2
+                              }
+                              device [
+                                PositionSensor {
+                                  name "LBL2_position sensor"
+                                }
+                                RotationalMotor {
+                                  name "LBL2_rotational motor"
+                                  maxTorque 2000
+                                }
+                              ]
+                              endPoint Solid {
+                                translation 2.775557561564793e-17 -0.05734304192644425 0.19160317205802052
+                                rotation -1 0 0 1.2799999999999998
+                                children [
+                                  DEF LEG_1_SHAPE Shape {
+                                    appearance PBRAppearance {
+                                    }
+                                    geometry Capsule {
+                                      height 0.4
+                                      radius 0.02
+                                    }
+                                  }
+                                  TouchSensor {
+                                    translation 1.3145040611561853e-13 -0.2000000773008411 -6.040024705389335e-08
+                                    rotation 1 0 0 0.78
+                                    children [
+                                      DEF TC_SENSOR Shape {
+                                        appearance PBRAppearance {
+                                        }
+                                        geometry Sphere {
+                                          radius 0.05
+                                        }
+                                      }
+                                    ]
+                                    name "LB_touch sensor"
+                                    boundingObject USE TC_SENSOR
+                                    physics Physics {
+                                      density -1
+                                      mass 0.2
+                                    }
+                                    type "force-3d"
+                                    lookupTable [
+                                      0 0 0
+                                      5000 5000 0
+                                    ]
+                                    resolution 0.01
+                                  }
+                                ]
+                                name "XIAOTUI_LB"
+                                boundingObject USE LEG_1_SHAPE
+                                physics Physics {
+                                  density -1
+                                  mass 0.1
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                      name "DATUI_LB"
+                      boundingObject USE LEG_0_SHAPE
+                      physics Physics {
+                        density -1
+                        mass 0.1
+                        centerOfMass [
+                          0 0 0
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+            name "GUANJIE_LB"
+            boundingObject USE L0_SHAPE
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF LF_LEG_POS Transform {
+      translation 0.24 0 0.3
+      children [
+        DEF LF_LEG_L0 HingeJoint {
+          jointParameters HingeJointParameters {
+            position 4.2997352248025267e-20
+            axis 0 0 1
+            minStop -0.8
+            maxStop 0.8
+          }
+          device [
+            PositionSensor {
+              name "LFL0_position sensor"
+            }
+            RotationalMotor {
+              name "LFL0_rotational motor"
+              maxTorque 2000
+            }
+          ]
+          endPoint Solid {
+            translation 2.945884000626879e-07 4.37845133315349e-05 -6.263792522442862e-06
+            rotation -0.9999999998969431 -1.0134092144424352e-05 1.016927041216694e-05 1.5708278592232392
+            children [
+              DEF L0_SHAPE Shape {
+                appearance PBRAppearance {
+                }
+                geometry Cylinder {
+                  height 0.05
+                  radius 0.02
+                }
+              }
+              Transform {
+                rotation 1 0 0 1.5707996938995747
+                children [
+                  DEF LF_LEG_L1 HingeJoint {
+                    jointParameters HingeJointParameters {
+                      position 0.6
+                      minStop 0.2
+                      maxStop 1.5
+                    }
+                    device [
+                      PositionSensor {
+                        name "LFL1_position sensor"
+                      }
+                      RotationalMotor {
+                        name "LFL1_rotational motor"
+                        maxTorque 2000
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 3.948149869259003e-07 -0.1648094396087731 -0.11296754506846131
+                      rotation 0.9999999999877242 1.9443594759893417e-06 4.55753928631796e-06 0.6000201514453004
+                      children [
+                        DEF LEG_0_SHAPE Shape {
+                          appearance PBRAppearance {
+                            baseColor 1 1 0
+                            roughness 1
+                            metalness 0
+                          }
+                          geometry Capsule {
+                            height 0.4
+                            radius 0.02
+                          }
+                        }
+                        Transform {
+                          translation 0 -0.2 0
+                          children [
+                            DEF LF_LEG_L2 HingeJoint {
+                              jointParameters HingeJointParameters {
+                                position -1.28
+                                minStop -2.2
+                                maxStop -0.2
+                              }
+                              device [
+                                PositionSensor {
+                                  name "LFL2_position sensor"
+                                }
+                                RotationalMotor {
+                                  name "LFL2_rotational motor"
+                                  maxTorque 2000
+                                }
+                              ]
+                              endPoint Solid {
+                                translation 5.551115123129557e-17 -0.05734304192644439 0.191603172058021
+                                rotation -1 0 0 1.2799999999999998
+                                children [
+                                  DEF LEG_1_SHAPE Shape {
+                                    appearance PBRAppearance {
+                                    }
+                                    geometry Capsule {
+                                      height 0.4
+                                      radius 0.02
+                                    }
+                                  }
+                                  TouchSensor {
+                                    translation 1.314226505400029e-13 -0.20000007730084102 -6.040024708164893e-08
+                                    rotation 1 0 0 0.78
+                                    children [
+                                      DEF TC_SENSOR Shape {
+                                        appearance PBRAppearance {
+                                        }
+                                        geometry Sphere {
+                                          radius 0.05
+                                        }
+                                      }
+                                    ]
+                                    name "LF_touch sensor"
+                                    boundingObject USE TC_SENSOR
+                                    physics Physics {
+                                      density -1
+                                      mass 0.2
+                                    }
+                                    type "force-3d"
+                                    lookupTable [
+                                      0 0 0
+                                      5000 5000 0
+                                    ]
+                                    resolution 0.01
+                                  }
+                                ]
+                                name "XIAOTUI"
+                                boundingObject USE LEG_1_SHAPE
+                                physics Physics {
+                                  density -1
+                                  mass 0.1
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                      name "DATUI"
+                      boundingObject USE LEG_0_SHAPE
+                      physics Physics {
+                        density -1
+                        mass 0.1
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+            name "GUANJIE"
+            boundingObject USE L0_SHAPE
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF RB_LEG_POS Transform {
+      translation -0.24 0 -0.3
+      children [
+        DEF RB_LEG_L0 HingeJoint {
+          jointParameters HingeJointParameters {
+            position 1.1324129340792117e-19
+            axis 0 0 1
+            minStop -0.8
+            maxStop 0.8
+          }
+          device [
+            PositionSensor {
+              name "RBL0_position sensor"
+            }
+            RotationalMotor {
+              name "RBL0_rotational motor"
+              maxTorque 2000
+            }
+          ]
+          endPoint Solid {
+            translation 4.3863095561251655e-07 0.0002692197568010545 -7.42186654179022e-06
+            rotation -0.9999999999213061 8.860936338486314e-06 -8.880968534372733e-06 1.5708309725138432
+            children [
+              DEF L0_SHAPE Shape {
+                appearance PBRAppearance {
+                }
+                geometry Cylinder {
+                  height 0.05
+                  radius 0.02
+                }
+              }
+              Transform {
+                rotation 1 0 0 1.5707996938995747
+                children [
+                  DEF RB_LEG_L1 HingeJoint {
+                    jointParameters HingeJointParameters {
+                      position 0.6
+                      minStop 0.2
+                      maxStop 1.5
+                    }
+                    device [
+                      PositionSensor {
+                        name "RBL1_position sensor"
+                      }
+                      RotationalMotor {
+                        name "RBL1_rotational motor"
+                        maxTorque 2000
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 4.021969482791736e-06 -0.1647843647528025 -0.11298351469654953
+                      rotation 0.9999999998501005 -6.8429308309981135e-06 1.590513241334708e-05 0.6000197380614258
+                      children [
+                        DEF LEG_0_SHAPE Shape {
+                          appearance PBRAppearance {
+                            baseColor 1 1 0
+                            roughness 1
+                            metalness 0
+                          }
+                          geometry Capsule {
+                            height 0.4
+                            radius 0.02
+                          }
+                        }
+                        Transform {
+                          translation 0 -0.2 0
+                          children [
+                            DEF RB_LEG_L2 HingeJoint {
+                              jointParameters HingeJointParameters {
+                                position -1.28
+                                minStop -2.2
+                                maxStop -0.2
+                              }
+                              device [
+                                PositionSensor {
+                                  name "RBL2_position sensor"
+                                }
+                                RotationalMotor {
+                                  name "RBL2_rotational motor"
+                                  maxTorque 2000
+                                }
+                              ]
+                              endPoint Solid {
+                                translation 0 -0.05734304192644064 0.1916031720580119
+                                rotation -1 0 0 1.2799999999999998
+                                children [
+                                  DEF LEG_1_SHAPE Shape {
+                                    appearance PBRAppearance {
+                                    }
+                                    geometry Capsule {
+                                      height 0.4
+                                      radius 0.02
+                                    }
+                                  }
+                                  TouchSensor {
+                                    translation 1.3145040611561853e-13 -0.20000007730084096 -6.04002471094045e-08
+                                    rotation 1 0 0 0.78
+                                    children [
+                                      DEF TC_SENSOR Shape {
+                                        appearance PBRAppearance {
+                                        }
+                                        geometry Sphere {
+                                          radius 0.05
+                                        }
+                                      }
+                                    ]
+                                    name "RB_touch sensor"
+                                    boundingObject USE TC_SENSOR
+                                    physics Physics {
+                                      density -1
+                                      mass 0.2
+                                    }
+                                    type "force-3d"
+                                    lookupTable [
+                                      0 0 0
+                                      5000 5000 0
+                                    ]
+                                    resolution 0.01
+                                  }
+                                ]
+                                boundingObject USE LEG_1_SHAPE
+                                physics Physics {
+                                  density -1
+                                  mass 0.1
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                      boundingObject USE LEG_0_SHAPE
+                      physics Physics {
+                        density -1
+                        mass 0.1
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+            boundingObject USE L0_SHAPE
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+    DEF RF_LEG_POS Transform {
+      translation -0.24 0 0.3
+      children [
+        DEF RF_LEG_L0 HingeJoint {
+          jointParameters HingeJointParameters {
+            position 4.3100604842605623e-20
+            axis 0 0 1
+            minStop -0.8
+            maxStop 0.8
+          }
+          device [
+            PositionSensor {
+              name "RFL0_position sensor"
+            }
+            RotationalMotor {
+              name "RFL0_rotational motor"
+              maxTorque 2000
+            }
+          ]
+          endPoint Solid {
+            translation -3.580009655390609e-07 3.901523243865514e-05 -6.135334481793816e-06
+            rotation -0.9999999998777968 -1.1071115101914136e-05 1.1037967864088484e-05 1.5708276420689284
+            children [
+              DEF L0_SHAPE Shape {
+                appearance PBRAppearance {
+                }
+                geometry Cylinder {
+                  height 0.05
+                  radius 0.02
+                }
+              }
+              Transform {
+                rotation 1 0 0 1.5707996938995747
+                children [
+                  DEF RF_LEG_L1 HingeJoint {
+                    jointParameters HingeJointParameters {
+                      position 0.6
+                      minStop 0.2
+                      maxStop 1.5
+                    }
+                    device [
+                      PositionSensor {
+                        name "RFL1_position sensor"
+                      }
+                      RotationalMotor {
+                        name "RFL1_rotational motor"
+                        maxTorque 2000
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 1.9717706744245664e-05 -0.1652801316716368 -0.11307736855778829
+                      rotation 0.999999993062816 -9.344326720836941e-05 7.171278913562168e-05 0.6000024887908814
+                      children [
+                        DEF LEG_0_SHAPE Shape {
+                          appearance PBRAppearance {
+                            baseColor 1 1 0
+                            roughness 1
+                            metalness 0
+                          }
+                          geometry Capsule {
+                            height 0.4
+                            radius 0.02
+                          }
+                        }
+                        Transform {
+                          translation 0 -0.2 0
+                          children [
+                            DEF RF_LEG_L2 HingeJoint {
+                              jointParameters HingeJointParameters {
+                                position -1.28
+                                minStop -2.2
+                                maxStop -0.2
+                              }
+                              device [
+                                PositionSensor {
+                                  name "RFL2_position sensor"
+                                }
+                                RotationalMotor {
+                                  name "RFL2_rotational motor"
+                                  maxTorque 2000
+                                }
+                              ]
+                              endPoint Solid {
+                                translation 2.775557561564775e-17 -0.05734304192644806 0.19160317205803615
+                                rotation -1 0 0 1.2799999999999998
+                                children [
+                                  DEF LEG_1_SHAPE Shape {
+                                    appearance PBRAppearance {
+                                    }
+                                    geometry Capsule {
+                                      height 0.4
+                                      radius 0.02
+                                    }
+                                  }
+                                  TouchSensor {
+                                    translation 1.3145040611561853e-13 -0.20000007730084113 -6.040024708164893e-08
+                                    rotation 1 0 0 0.67
+                                    children [
+                                      DEF TC_SENSOR Shape {
+                                        appearance PBRAppearance {
+                                        }
+                                        geometry Sphere {
+                                          radius 0.05
+                                        }
+                                      }
+                                    ]
+                                    name "RF_touch sensor"
+                                    boundingObject USE TC_SENSOR
+                                    physics Physics {
+                                      density -1
+                                      mass 0.2
+                                    }
+                                    type "force-3d"
+                                    lookupTable [
+                                      0 0 0
+                                      5000 5000 0
+                                    ]
+                                    resolution 0.01
+                                  }
+                                ]
+                                boundingObject USE LEG_1_SHAPE
+                                physics Physics {
+                                  density -1
+                                  mass 0.1
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                      boundingObject USE LEG_0_SHAPE
+                      physics Physics {
+                        density -1
+                        mass 0.1
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+            name "solid(3)"
+            boundingObject USE L0_SHAPE
+            physics Physics {
+            }
+          }
+        }
+      ]
+    }
+  ]
+  boundingObject USE BODY_SHAPE
+  physics Physics {
+    density -1
+    mass 50
+    centerOfMass [
+      0 0 0
+    ]
+  }
+  controller "my_controller"
+}
+DEF SLOPE_PATH Solid {
+  translation -8.24 0 6.64
+  children [
+    DEF SLOPE_GROUP Group {
+      children [
+        Transform {
+          translation 0 0.207058 0.772743
+          rotation 1 0 0 -0.2617996938995747
+          children [
+            Shape {
+              appearance DEF APPERANCE PBRAppearance {
+                baseColor 0.929412 0.992157 1
+                roughness 1
+                metalness 0
+              }
+              geometry DEF PATH Box {
+                size 1.5 0.1 2
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0.47 2.73
+          children [
+            Shape {
+              appearance USE APPERANCE
+              geometry USE PATH
+            }
+          ]
+        }
+        Transform {
+          translation 0 0.210114 4.67684
+          rotation -1 0 0 -0.2617996938995747
+          children [
+            Shape {
+              appearance USE APPERANCE
+              geometry USE PATH
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  name "solid(1)"
+  boundingObject USE SLOPE_GROUP
+}
+DEF SLOPE_PATH Solid {
+  translation 5.3343 -1.77636e-14 5.9582
+  rotation 0 1 0 -1.5707953071795862
+  children [
+    DEF SLOPE_GROUP Group {
+      children [
+        Transform {
+          translation 0 0.610201 0.563372
+          rotation 1 0 0 -0.3926996938995747
+          children [
+            Shape {
+              appearance DEF APPERANCE PBRAppearance {
+                baseColor 0.929412 0.992157 1
+                roughness 1
+                metalness 0
+              }
+              geometry DEF PATH Box {
+                size 1.5 0.1 5
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 1.56 5.36
+          children [
+            Shape {
+              appearance USE APPERANCE
+              geometry USE PATH
+            }
+          ]
+        }
+        Transform {
+          translation 0 0.598708 10.1076
+          rotation -1 0 0 -0.3926996938995747
+          children [
+            Shape {
+              appearance USE APPERANCE
+              geometry USE PATH
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  name "solid(2)"
+  boundingObject USE SLOPE_GROUP
+}
+DEF SLOPE_PATH Solid {
+  translation 8.18 0 -9.24
+  children [
+    DEF SLOPE_GROUP Group {
+      children [
+        Transform {
+          translation 0 0.610201 0.563372
+          rotation 1 0 0 -0.26180030610042526
+          children [
+            Shape {
+              appearance DEF APPERANCE PBRAppearance {
+                baseColor 0.929412 0.992157 1
+                roughness 1
+                metalness 0
+              }
+              geometry DEF PATH Box {
+                size 1.5 0.1 5
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 1.25 5.44
+          children [
+            Shape {
+              appearance USE APPERANCE
+              geometry USE PATH
+            }
+          ]
+        }
+        Transform {
+          translation 0 0.592256 10.3323
+          rotation -1 0 0 -0.26180030610042526
+          children [
+            Shape {
+              appearance USE APPERANCE
+              geometry USE PATH
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  name "solid(4)"
+  boundingObject USE SLOPE_GROUP
+}
